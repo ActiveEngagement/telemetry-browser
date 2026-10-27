@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-27
+
 ### Fixed
 
 - `init()` no longer rejects when the HyperDX SDK fails to load or start, for example when a blocker blocks its script or a deploy removes it. It writes a console warning and resolves to `null`.
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `deployment.environment.name`, `deployment.environment` and `service.version` resource attributes.
 - Version 1 of the config contract, with the `fixtures/config.v1.json` example.
 
-[unreleased]: https://github.com/ActiveEngagement/telemetry-browser/compare/v0.1.1...HEAD
+[unreleased]: https://github.com/ActiveEngagement/telemetry-browser/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/ActiveEngagement/telemetry-browser/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/ActiveEngagement/telemetry-browser/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/ActiveEngagement/telemetry-browser/releases/tag/v0.1.0
