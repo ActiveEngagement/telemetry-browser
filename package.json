@@ -1,0 +1,53 @@
+{
+    "name": "@actengage/telemetry-browser",
+    "version": "0.0.0",
+    "description": "Browser RUM for ActiveEngagement's Laravel apps: reads laravel-telemetry's @telemetry config and starts HyperDX.",
+    "license": "MIT",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ActiveEngagement/telemetry-browser.git"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./inertia": {
+            "types": "./dist/inertia.d.ts",
+            "import": "./dist/inertia.js"
+        },
+        "./fixtures/config.v1.json": "./fixtures/config.v1.json"
+    },
+    "files": [
+        "dist",
+        "fixtures"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "prepack": "tsc -p tsconfig.build.json",
+        "test": "vitest run",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@hyperdx/browser": "0.26.0"
+    },
+    "peerDependencies": {
+        "@inertiajs/core": "^2.0.0 || ^3.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@inertiajs/core": {
+            "optional": true
+        }
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@inertiajs/core": "^3.9.1",
+        "jsdom": "^30.1.3",
+        "typescript": "^6.0.3",
+        "vitest": "^5.0.5"
+    }
+}
