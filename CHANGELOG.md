@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-27
+
 ### Added
 
 - `init()` reads the config that laravel-telemetry's `@telemetry` directive renders, and starts the HyperDX browser SDK with session replay. It loads the SDK only in the browser, and only when telemetry is enabled.
@@ -14,3 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `trackInertiaUser()` in `@actengage/telemetry-browser/inertia` keeps the user current after a login or a logout.
 - `deployment.environment.name`, `deployment.environment` and `service.version` resource attributes.
 - Version 1 of the config contract, with the `fixtures/config.v1.json` example.
+
+[unreleased]: https://github.com/ActiveEngagement/telemetry-browser/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/ActiveEngagement/telemetry-browser/releases/tag/v0.1.0
