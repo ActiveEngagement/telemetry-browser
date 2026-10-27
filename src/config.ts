@@ -57,6 +57,6 @@ export function parseConfig(config: TelemetryConfig): TelemetryConfig | null {
     return config;
 }
 
-function warn(message: string, ...details: unknown[]): void {
+export function warn(message: string, ...details: unknown[]): void {
     console.warn(`[telemetry] ${message} Telemetry is off.`, ...details);
 }

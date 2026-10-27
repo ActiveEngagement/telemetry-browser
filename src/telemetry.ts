@@ -1,6 +1,6 @@
 import type HyperDX from '@hyperdx/browser';
 
-import { parseConfig, readConfig, type TelemetryConfig, type TelemetryUser } from './config.js';
+import { parseConfig, readConfig, type TelemetryConfig, type TelemetryUser, warn } from './config.js';
 import { ANONYMOUS_ATTRIBUTES, userAttributes } from './identity.js';
 
 export type Sdk = Pick<typeof HyperDX, 'init' | 'setGlobalAttributes'>;
@@ -55,8 +55,18 @@ export function createTelemetry<T extends Sdk>(loadSdk: () => Promise<T>): Telem
             return null;
         }
 
-        const loaded = await loadSdk();
-        loaded.init(toSdkConfig(config, overrides));
+        let loaded: T;
+
+        // A blocked or redeployed SDK chunk must not reject init(), which apps call with `void`.
+        try {
+            loaded = await loadSdk();
+            loaded.init(toSdkConfig(config, overrides));
+        } catch (error) {
+            warn('The HyperDX SDK failed to load or start.', error);
+
+            return null;
+        }
+
         sdk = loaded;
 
         const initialUser = user === undefined ? config.user : user;

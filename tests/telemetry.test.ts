@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createTelemetry } from '../src/telemetry.js';
+import { SdkLoaderSaboteur, SdkSaboteur } from './doubles/SdkSaboteur.js';
 import { SdkLoaderSpy } from './doubles/SdkSpy.js';
 import { CONFIG, renderConfig } from './support.js';
 
@@ -104,6 +105,28 @@ describe('init', () => {
         expect(first).toBe(second);
         expect(loader.loads).toBe(1);
         expect(loader.sdk.configs).toHaveLength(1);
+    });
+
+    it('resolves to null and warns when the SDK fails to load', async (): Promise<void> => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        renderConfig(CONFIG);
+        const error = new TypeError('Failed to fetch dynamically imported module');
+
+        const sdk = await createTelemetry(new SdkLoaderSaboteur(error).load).init();
+
+        expect(sdk).toBeNull();
+        expect(warn).toHaveBeenCalledWith(expect.stringContaining('failed to load or start'), error);
+    });
+
+    it('resolves to null and warns when the SDK fails to start', async (): Promise<void> => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        renderConfig(CONFIG);
+        const error = new Error('The SDK failed to start.');
+
+        const sdk = await createTelemetry(async () => new SdkSaboteur(error)).init();
+
+        expect(sdk).toBeNull();
+        expect(warn).toHaveBeenCalledWith(expect.stringContaining('failed to load or start'), error);
     });
 });
 
