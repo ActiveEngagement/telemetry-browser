@@ -46,8 +46,8 @@ jobs:
           bin/changelog notes "${TAG#v}" > "$RUNNER_TEMP/notes.md"
           gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
 
-  publish:
-    name: Publish to npm
+  stage:
+    name: Stage on npm
     needs: release
     if: ${{ needs.release.outputs.version != '' }}
     runs-on: ubuntu-24.04
@@ -70,7 +70,7 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
 
-      # Trusted publishing needs npm 11.5.1 or later.
+      # Staged publishing needs npm 11.15.0 or later.
       - name: Update npm
         run: npm install --global npm@11
 
@@ -80,7 +80,7 @@ jobs:
       - name: Test
         run: bun run test
 
-      - name: Publish
+      - name: Stage
         env:
           VERSION: ${{ needs.release.outputs.version }}
         run: |
@@ -91,4 +91,5 @@ jobs:
             exit 0
           fi
 
-          npm publish
+          npm stage publish --provenance
+          echo "Approve $name@$VERSION in the Staged Packages tab on npmjs.com, or with \`npm stage approve <stage-id>\`." >> "$GITHUB_STEP_SUMMARY"
