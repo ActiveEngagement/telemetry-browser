@@ -89,6 +89,20 @@ bun run test
 bun run build
 ```
 
+### Changelog
+
+`CHANGELOG.md` follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/). CI runs `bin/changelog check`, which rejects other formats.
+
+- Add each notable change to `## [Unreleased]`, under `### Added`, `Changed`, `Deprecated`, `Removed`, `Fixed` or `Security`.
+- A PR that does not change `CHANGELOG.md` fails the `Changelog` check. For changes to tests, CI or internal code, add the `skip-changelog` label.
+- Do not add release headings, links or the `package.json` version by hand. `bin/changelog release` adds them.
+
+### Releases
+
+1. On a new branch, run `bin/changelog release patch` (or `minor` or `major`). It moves the `Unreleased` entries to the new version, sets the version in `package.json`, and prints the version.
+2. Commit `CHANGELOG.md` and `package.json` as `chore: release vX.Y.Z` and open a PR.
+3. When the PR merges, the `release` workflow tags the commit, creates the GitHub release with the entries, and publishes the version to npm.
+
 ## License
 
 MIT
