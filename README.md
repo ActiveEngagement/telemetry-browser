@@ -101,7 +101,8 @@ bun run build
 
 1. On a new branch, run `bin/changelog release patch` (or `minor` or `major`). It moves the `Unreleased` entries to the new version, sets the version in `package.json`, and prints the version.
 2. Commit `CHANGELOG.md` and `package.json` as `chore: release vX.Y.Z` and open a PR.
-3. When the PR merges, the `release` workflow tags the commit, creates the GitHub release with the entries, and publishes the version to npm.
+3. When the PR merges, the `release` workflow tags the commit, creates the GitHub release with the entries, and stages the version on npm.
+4. Approve the staged version in the package's Staged Packages tab on npmjs.com, or with `npm stage approve <stage-id>`. Both ask for 2FA. The version is not public until a maintainer approves it.
 
 ## License
 
