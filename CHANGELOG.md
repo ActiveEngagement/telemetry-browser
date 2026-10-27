@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `init()` no longer rejects when the HyperDX SDK fails to load or start, for example when a blocker blocks its script or a deploy removes it. It writes a console warning and resolves to `null`.
+
 ## [0.1.1] - 2026-10-27
 
 ### Changed
