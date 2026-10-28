@@ -74,7 +74,7 @@ An app that does not render `@telemetry` passes the whole config instead: `init(
 
 ## The config contract
 
-The directive renders `<script id="telemetry-config" type="application/json">`. [`fixtures/config.v1.json`](fixtures/config.v1.json) is an example, and laravel-telemetry tests its output against the same file.
+The directive renders `<script id="telemetry-config" type="application/json">`. [`fixtures/config.v1.json`](fixtures/config.v1.json) is an example, and laravel-telemetry tests its output against a copy of it. `bin/check-fixture` fails CI when the copy on laravel-telemetry's `main` is different. To change the shape, merge the change in laravel-telemetry first.
 
 When browser telemetry is off, or a setting is unset, blank or the wrong type, the directive renders `{"v":1,"enabled":false}`. `init()` then does not start. The `TelemetryConfig` type is a union of `EnabledTelemetryConfig` and `DisabledTelemetryConfig`, so check `config.enabled` before you read other fields.
 

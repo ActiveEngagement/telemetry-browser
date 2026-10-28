@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+fixture=fixtures/config.v1.json
+copy=https://raw.githubusercontent.com/ActiveEngagement/laravel-telemetry/main/tests/Fixtures/browser-config.v1.json
+
+theirs=$(curl --fail --silent --show-error --location "$copy" | jq --sort-keys .)
+ours=$(jq --sort-keys . "$fixture")
+
+if [[ "$ours" != "$theirs" ]]; then
+  echo "$fixture does not match laravel-telemetry's copy at $copy:" >&2
+  diff <(echo "$ours") <(echo "$theirs") >&2 || true
+  exit 1
+fi
+
+echo "$fixture matches laravel-telemetry's copy."
