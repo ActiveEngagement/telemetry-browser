@@ -15,10 +15,10 @@ export type ReplayConfig = {
     blockSelector?: string | null;
 };
 
-/** The JSON that laravel-telemetry's `@telemetry` directive renders. */
-export type TelemetryConfig = {
+/** The JSON that laravel-telemetry's `@telemetry` directive renders when browser telemetry is on. */
+export type EnabledTelemetryConfig = {
     v: number;
-    enabled: boolean;
+    enabled: true;
     url: string;
     apiKey: string;
     service: string;
@@ -28,6 +28,14 @@ export type TelemetryConfig = {
     replay: ReplayConfig;
     consoleCapture: boolean;
 };
+
+/** What `@telemetry` renders when browser telemetry is off or a setting is wrong. */
+export type DisabledTelemetryConfig = {
+    v: number;
+    enabled: false;
+};
+
+export type TelemetryConfig = EnabledTelemetryConfig | DisabledTelemetryConfig;
 
 export function readConfig(doc: Document = document): TelemetryConfig | null {
     const json = doc.getElementById(CONFIG_ELEMENT_ID)?.textContent;

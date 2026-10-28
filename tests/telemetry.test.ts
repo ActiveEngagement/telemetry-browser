@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createTelemetry } from '../src/telemetry.js';
 import { SdkLoaderSaboteur, SdkSaboteur } from './doubles/SdkSaboteur.js';
 import { SdkLoaderSpy } from './doubles/SdkSpy.js';
-import { CONFIG, renderConfig } from './support.js';
+import { CONFIG, DISABLED_CONFIG, renderConfig } from './support.js';
 
 const ADA = {
     'user.id': '7',
@@ -78,7 +78,7 @@ describe('init', () => {
     });
 
     it('does not load the SDK when telemetry is disabled', async (): Promise<void> => {
-        renderConfig({ ...CONFIG, enabled: false });
+        renderConfig(DISABLED_CONFIG);
 
         const sdk = await createTelemetry(loader.load).init();
 
