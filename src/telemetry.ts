@@ -1,6 +1,6 @@
 import type HyperDX from '@hyperdx/browser';
 
-import { parseConfig, readConfig, type TelemetryConfig, type TelemetryUser, warn } from './config.js';
+import { type EnabledTelemetryConfig, parseConfig, readConfig, type TelemetryConfig, type TelemetryUser, warn } from './config.js';
 import { ANONYMOUS_ATTRIBUTES, userAttributes } from './identity.js';
 
 export type Sdk = Pick<typeof HyperDX, 'init' | 'setGlobalAttributes'>;
@@ -18,7 +18,7 @@ export type Telemetry<T extends Sdk = Sdk> = {
     anonymize(): void;
 };
 
-export function toSdkConfig(config: TelemetryConfig, overrides: Partial<SdkConfig> = {}): SdkConfig {
+export function toSdkConfig(config: EnabledTelemetryConfig, overrides: Partial<SdkConfig> = {}): SdkConfig {
     return {
         url: config.url,
         apiKey: config.apiKey,

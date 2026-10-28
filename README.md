@@ -76,6 +76,8 @@ An app that does not render `@telemetry` passes the whole config instead: `init(
 
 The directive renders `<script id="telemetry-config" type="application/json">`. [`fixtures/config.v1.json`](fixtures/config.v1.json) is an example, and laravel-telemetry tests its output against the same file.
 
+When browser telemetry is off, or a setting is unset, blank or the wrong type, the directive renders `{"v":1,"enabled":false}`. `init()` then does not start. The `TelemetryConfig` type is a union of `EnabledTelemetryConfig` and `DisabledTelemetryConfig`, so check `config.enabled` before you read other fields.
+
 The `v` field is the major version of the shape. New optional fields do not change it. When `v` is a version this package does not know, `init()` writes a console warning and does not start.
 
 The directive also renders `<meta name="traceparent">`. The SDK's document-load instrumentation reads it, so the first page load joins the server's trace.

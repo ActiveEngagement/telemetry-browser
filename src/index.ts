@@ -3,7 +3,7 @@ import type HyperDX from '@hyperdx/browser';
 import { createTelemetry, type Telemetry } from './telemetry.js';
 
 export { CONFIG_ELEMENT_ID, parseConfig, readConfig, SCHEMA_VERSION } from './config.js';
-export type { ReplayConfig, TelemetryConfig, TelemetryUser } from './config.js';
+export type { DisabledTelemetryConfig, EnabledTelemetryConfig, ReplayConfig, TelemetryConfig, TelemetryUser } from './config.js';
 export type { InitOptions, Sdk, SdkConfig, Telemetry } from './telemetry.js';
 
 type HyperDXTelemetry = Telemetry<typeof HyperDX>;

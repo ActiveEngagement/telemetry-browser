@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { parseConfig, readConfig } from '../src/config.js';
-import { CONFIG, renderConfig, renderTag } from './support.js';
+import { CONFIG, DISABLED_CONFIG, renderConfig, renderTag } from './support.js';
 
 beforeEach((): void => {
     document.head.innerHTML = '';
@@ -14,6 +14,14 @@ describe('readConfig', () => {
         const config = readConfig();
 
         expect(config).toEqual(CONFIG);
+    });
+
+    it('reads the off config that the directive renders when browser telemetry is off', (): void => {
+        renderConfig(DISABLED_CONFIG);
+
+        const config = readConfig();
+
+        expect(config).toEqual({ v: 1, enabled: false });
     });
 
     it('returns null and warns when the page has no tag', (): void => {

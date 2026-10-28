@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `TelemetryConfig` is now a union of `EnabledTelemetryConfig` and `DisabledTelemetryConfig`. laravel-telemetry 0.2 renders `{"v":1,"enabled":false}` when browser telemetry is off or a setting is wrong, and the old type did not allow that shape. Code that reads `url` or other fields from `readConfig()` must check `config.enabled` first.
+
 ## [0.1.2] - 2026-10-27
 
 ### Fixed
