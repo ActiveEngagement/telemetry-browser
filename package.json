@@ -1,6 +1,6 @@
 {
     "name": "@actengage/telemetry-browser",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "Browser RUM for ActiveEngagement's Laravel apps: reads laravel-telemetry's @telemetry config and starts HyperDX.",
     "license": "MIT",
     "type": "module",
